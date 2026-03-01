@@ -1,9 +1,18 @@
+import { ThemeProvider } from "@/components/theme-provider";
+import { BrowserRouter } from "react-router-dom";
+import { AppRoutes } from "@/components/AppRoutes";
+import { LocaleProvider } from "@/context/LocaleContext";
+
 export function App() {
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="font-medium">Hello World</div>
-    </div>
-  )
+    <BrowserRouter>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <LocaleProvider>
+          <AppRoutes />
+        </LocaleProvider>
+      </ThemeProvider>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
