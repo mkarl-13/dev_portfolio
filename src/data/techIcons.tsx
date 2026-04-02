@@ -16,6 +16,7 @@ import {
   SiCplusplus,
   SiDotnet,
   SiSymfony,
+  SiPhp,
 } from "react-icons/si";
 import type { IconType } from "react-icons";
 import CSharpIcon from "@/assets/csharp-icon.svg?react";
@@ -50,6 +51,7 @@ export const techIcons: Record<string, Omit<TechIcon, "label">> = {
   "C#": { icon: CSharpIcon as IconType, color: "#239120" },
   "Windows Forms": { icon: SiDotnet, color: "#512BD4" },
   Symfony: { icon: SiSymfony, color: "adaptive" },
+  PHP: { icon: SiPhp, color: "#777BB4" },
 };
 
 export function resolveTechIcons(

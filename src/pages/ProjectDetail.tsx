@@ -7,6 +7,7 @@ import { resolveTechIcons } from "@/data/techIcons";
 import { useTheme } from "@/components/theme-provider";
 import { useLocale } from "@/context/LocaleContext";
 import ReactMarkdown from "react-markdown";
+import { ExternalLink } from "lucide-react";
 
 export function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -28,6 +29,7 @@ export function ProjectDetail() {
   }
 
   const techList = resolveTechIcons(project.stack, theme);
+  const allLinks = project.links ?? [];
 
   return (
     <Layout>
@@ -130,32 +132,69 @@ export function ProjectDetail() {
           </div>
         </FadeIn>
 
-        <FadeIn immediate delay={220}>
-          <div className="flex gap-4">
-            {project.showGithub !== false && (
-              <Button asChild>
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </a>
-              </Button>
-            )}
-            {project.showLive !== false && project.live && (
-              <Button variant="outline" asChild>
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Live Demo
-                </a>
-              </Button>
-            )}
-          </div>
-        </FadeIn>
+        {/* Section liens documents */}
+        {allLinks.length > 0 && (
+          <FadeIn immediate delay={200}>
+            <div className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                {locale === "fr" ? "Documents & liens" : "Documents & links"}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {allLinks.map((link, i) =>
+                  link.url.trim() ? (
+                    <Button
+                      key={i}
+                      variant="outline"
+                      asChild
+                      className="justify-start"
+                    >
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink className="w-4 h-4 shrink-0" />
+                        {link.label[locale]}
+                      </a>
+                    </Button>
+                  ) : (
+                    <Button
+                      key={i}
+                      variant="outline"
+                      disabled
+                      className="justify-start"
+                    >
+                      <ExternalLink className="w-4 h-4 shrink-0" />
+                      {link.label[locale]}
+                    </Button>
+                  ),
+                )}
+              </div>
+            </div>
+          </FadeIn>
+        )}
+
+        {/* Vidéo de démonstration */}
+        {project.video && (
+          <FadeIn immediate delay={210}>
+            <div className="space-y-3">
+              <h2 className="text-xl font-semibold text-foreground">
+                {locale === "fr" ? "Vidéo de démonstration" : "Demo video"}
+              </h2>
+              <div className="aspect-video w-full rounded-xl overflow-hidden border">
+                <iframe
+                  src={project.video}
+                  className="w-full h-full"
+                  allowFullScreen
+                  title={
+                    locale === "fr" ? "Vidéo de démonstration" : "Demo video"
+                  }
+                />
+              </div>
+            </div>
+          </FadeIn>
+        )}
+
       </main>
     </Layout>
   );

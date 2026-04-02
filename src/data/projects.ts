@@ -1,8 +1,27 @@
 import voyages from "@/assets/voyages.png";
 import mediatek from "@/assets/mediatek.png";
+import mediatekformation from "@/assets/mediatekformation.png";
 import portfolio from "@/assets/portfolio.png";
 
+import mediatekDocumentsContextePdf from "@/assets/mediatekformation/87DP1ANWB0120.pdf";
+import crPdf from "@/assets/mediatekformation/cr.pdf";
+import contextePdf from "@/assets/mediatekformation/contexte.pdf";
+import pvrDocx from "@/assets/mediatekformation/pvr.docx";
+import cahierChargesPdf from "@/assets/mediatekformation/cahier_des_charges.pdf";
+import contratDevPdf from "@/assets/mediatekformation/contratDeveloppement.pdf";
+import missionsPdf from "@/assets/mediatekformation/missions.pdf";
+
 export type LocalizedString = { en: string; fr: string };
+
+export interface ProjectLink {
+  label: LocalizedString;
+  url: string;
+}
+
+export interface ProjectCompetency {
+  code: string;
+  label: LocalizedString;
+}
 
 export interface Project {
   slug: string;
@@ -15,9 +34,305 @@ export interface Project {
   live: string;
   showGithub?: boolean;
   showLive?: boolean;
+  links?: ProjectLink[];
+  video?: string;
+  competencies?: ProjectCompetency[];
 }
 
 export const projects: Project[] = [
+  {
+    video: "https://www.youtube.com/embed/54whQ_u7-J4",
+    slug: "mediatekformation",
+    title: {
+      en: "Course Management App",
+      fr: "Application de gestion de formations",
+    },
+    shortDesc: {
+      en: "Training video platform with a full back-office, authentication and automated deployment, developed as part of my CNED training.",
+      fr: "Plateforme de formations vidéo avec back-office complet, authentification et déploiement automatisé, développée dans le cadre de ma formation au CNED.",
+    },
+    longDesc: {
+      en: `## Overview
+
+As part of my first professional workshop at CNED, I maintained and extended an existing application called **Mediatekformation** — a platform for browsing training videos organized by playlists and categories for the fictional MediaTek86 library network.
+
+The original application only had a front-office. My mission was to add a complete back-office, secure it with authentication, write automated tests, and deploy the application.
+
+## Features
+
+- **Front-office**: browse, filter and sort training videos by playlist and category
+- **Number of formations per playlist**: new sortable column added to the playlist list and detail pages
+- **Back-office** (accessible via /admin):
+  - Manage formations: list, create, edit, delete (with CSRF protection)
+  - Manage playlists: list, create, edit, delete (only if empty)
+  - Manage categories: list, add, delete inline
+- **Authentication**: secured admin access with login/logout
+- **Automated tests**: functional tests for all list pages (sorts, filters, CRUD)
+- **Continuous deployment**: GitHub Actions workflow deploying via FTP on each push
+- **Automated database backup**: daily cron job on the server
+
+## Technical choices
+
+The application uses **Symfony** (PHP) with a **Twig** templating engine, **Bootstrap** for styling, and a **MySQL** relational database. The MVC architecture was already in place — I extended it while keeping the existing structure consistent.
+
+Tests are written with **PHPUnit** and Symfony's test client, simulating browser interactions without a real browser.
+
+## What I learned
+
+- Extending an existing Symfony application without breaking existing features
+- Building a complete CRUD back-office with security (CSRF tokens, authentication)
+- Writing functional tests with PHPUnit and Symfony's crawler
+- Setting up continuous deployment with GitHub Actions and FTP
+- Deploying and configuring a Symfony app on a shared hosting environment (o2switch)
+
+## Competencies covered (B1/B2)
+
+- **B1.1** Manage IT assets
+- **B1.3** Develop the organization's online presence
+- **B1.4** Work in project mode
+- **B1.5** Deploy IT services for users
+- **B1.6** Organize professional development
+- **B2.1** Design and develop an application solution
+- **B2.2** Perform corrective or evolutionary maintenance of an application
+- **B2.3** Manage data
+
+> This workshop was my first large-scale professional project. Beyond the technical aspects, I gained a lot in terms of project organisation and technical documentation.`,
+      fr: `## Présentation
+
+Dans le cadre de mon premier atelier professionnel au CNED, j'ai maintenu et fait évoluer une application existante appelée **Mediatekformation** — une plateforme de visionnage de formations organisées par playlists et catégories pour le réseau de médiathèques fictif MediaTek86.
+
+L'application d'origine ne comportait qu'une partie front-office. Ma mission était d'y ajouter un back-office complet, de le sécuriser par authentification, d'écrire des tests automatisés et de déployer l'application.
+
+## Fonctionnalités
+
+- **Front-office** : consultation, filtrage et tri des formations par playlist et catégorie
+- **Nombre de formations par playlist** : nouvelle colonne triable ajoutée sur la page des playlists et la page de détail
+- **Back-office** (accessible via /admin) :
+  - Gérer les formations : lister, créer, modifier, supprimer (avec protection CSRF)
+  - Gérer les playlists : lister, créer, modifier, supprimer (uniquement si vide)
+  - Gérer les catégories : lister, ajouter, supprimer inline
+- **Authentification** : accès admin sécurisé avec connexion/déconnexion
+- **Tests automatisés** : tests fonctionnels pour toutes les pages de listes (tris, filtres, CRUD)
+- **Déploiement continu** : workflow GitHub Actions déployant via FTP à chaque push
+- **Sauvegarde automatique de la BDD** : tâche cron quotidienne côté serveur
+
+## Choix techniques
+
+L'application utilise **Symfony** (PHP) avec le moteur de templates **Twig**, **Bootstrap** pour le style, et une base de données relationnelle **MySQL**. L'architecture MVC était déjà en place — je l'ai étendue en restant cohérent avec la structure existante.
+
+Les tests sont écrits avec **PHPUnit** et le client de test de Symfony, simulant des interactions navigateur sans vrai navigateur.
+
+## Ce que j'ai appris
+
+- Étendre une application Symfony existante sans casser les fonctionnalités en place
+- Construire un back-office CRUD complet avec sécurité (tokens CSRF, authentification)
+- Écrire des tests fonctionnels avec PHPUnit et le crawler Symfony
+- Mettre en place un déploiement continu avec GitHub Actions et FTP
+- Déployer et configurer une application Symfony sur un hébergement mutualisé (o2switch)
+
+## Compétences couvertes (B1/B2)
+
+- **B1.1** Gérer le patrimoine informatique
+- **B1.3** Développer la présence en ligne de l'organisation
+- **B1.4** Travailler en mode projet
+- **B1.5** Mettre à disposition des utilisateurs un service informatique
+- **B1.6** Organiser son développement professionnel
+- **B2.1** Concevoir et développer une solution applicative
+- **B2.2** Assurer la maintenance corrective ou évolutive d'une solution applicative
+- **B2.3** Gérer les données
+
+> Cet atelier était mon premier projet professionnel d'envergure. Au-delà de la technique, j'ai beaucoup progressé en organisation de projet et en rédaction de documentation technique.`,
+    },
+    stack: ["Symfony", "PHP", "MySQL", "PHPUnit"],
+    image: mediatekformation,
+    github: "https://github.com/mkarl-13/mediatekformation",
+    live: "http://app.sc3mika2559.universe.wf/",
+    showGithub: true,
+    showLive: true,
+    links: [
+      {
+        label: { en: "Project report (PDF)", fr: "Compte rendu (PDF)" },
+        url: crPdf,
+      },
+      {
+        label: { en: "Official context (PDF)", fr: "Contexte officiel (PDF)" },
+        url: contextePdf,
+      },
+      {
+        label: {
+          en: "Development contract (PDF)",
+          fr: "Contrat de développement (PDF)",
+        },
+        url: contratDevPdf,
+      },
+      {
+        label: { en: "Specifications", fr: "Cahier des charges" },
+        url: cahierChargesPdf,
+      },
+      {
+        label: {
+          en: "Missions document (PDF)",
+          fr: "Document des missions (PDF)",
+        },
+        url: missionsPdf,
+      },
+      {
+        label: { en: "Acceptance report (PDF)", fr: "PV de recette (PDF)" },
+        url: pvrDocx,
+      },
+      {
+        label: { en: "GitHub repository", fr: "Dépôt GitHub" },
+        url: "https://github.com/mkarl-13/mediatekformation",
+      },
+      {
+        label: { en: "Live site", fr: "Site en ligne" },
+        url: "http://app.sc3mika2559.universe.wf/",
+      },
+      {
+        label: { en: "Technical documentation", fr: "Documentation technique" },
+        url: "http://sc3mika2559.universe.wf/mediatekformation_doc/",
+      },
+    ],
+  },
+  {
+    slug: "mediatekdocuments",
+    title: {
+      en: "Document Management App",
+      fr: "Application de gestion de documents",
+    },
+    shortDesc: {
+      en: "Desktop document management application for the MediaTek86 library network, built with C# Windows Forms and a PHP REST API.",
+      fr: "Application desktop de gestion de documents pour le réseau de médiathèques MediaTek86, développée en C# Windows Forms avec une API REST en PHP.",
+    },
+    longDesc: {
+      en: `## Overview
+
+As part of my second professional workshop at CNED (AP2), I developed a document management desktop application for **InfoTech Services 86** (ITS 86), an IT services company contracted by the **MediaTek86** library network.
+
+The goal was to give library employees a Windows application to manage the document catalog (books, DVDs, CDs, etc.), communicating with a **PHP REST API** backed by a MySQL database.
+
+## Features
+
+- Browse and search documents in the full catalog
+- Add, edit and delete documents (CRUD)
+- Communicate with the REST API via HTTP requests
+- User authentication
+- Native Windows Forms interface
+
+## Technical choices
+
+The desktop client is built in **C#** with **Windows Forms**, following the **MVC architectural pattern**. Data is exposed by a custom **PHP REST API** (without framework) which queries a **MySQL** database.
+
+The two components are split into separate repositories: one for the Windows Forms client, one for the REST API.
+
+## What I learned
+
+- Designing a desktop application that consumes a REST API
+- Building a PHP REST API from scratch without a framework
+- Managing application state across multiple Windows Forms
+- Applying the MVC pattern in a desktop context
+- Coordinating two interdependent projects across separate repositories
+
+## Competencies covered (B1/B2)
+
+- **B1.1** Manage IT assets
+- **B1.4** Work in project mode
+- **B1.5** Deploy IT services for users
+- **B1.6** Organize professional development
+- **B2.1** Design and develop an application solution
+- **B2.3** Manage data
+
+> This workshop taught me to think in terms of distributed architecture — separating the data layer (API) from the presentation layer (desktop client).`,
+      fr: `## Présentation
+
+Dans le cadre de mon deuxième atelier professionnel au CNED (AP2), j'ai développé une application desktop de gestion de documents pour la société **InfoTech Services 86** (ITS 86), une ESN mandatée par le réseau de médiathèques **MediaTek86**.
+
+L'objectif était de fournir aux employés des médiathèques une application Windows permettant de gérer le catalogue de documents (livres, DVD, CD...), en communiquant avec une **API REST en PHP** connectée à une base de données MySQL.
+
+## Fonctionnalités
+
+- Consultation et recherche de documents dans le catalogue complet
+- Ajout, modification et suppression de documents (CRUD)
+- Communication avec l'API REST via des requêtes HTTP
+- Authentification utilisateur
+- Interface native Windows Forms
+
+## Choix techniques
+
+Le client desktop est développé en **C#** avec **Windows Forms**, selon le patron d'architecture **MVC**. Les données sont exposées par une **API REST en PHP** (sans framework) qui interroge une base de données **MySQL**.
+
+Les deux composants sont séparés en dépôts distincts : l'un pour le client Windows Forms, l'autre pour l'API REST.
+
+## Ce que j'ai appris
+
+- Concevoir une application desktop consommant une API REST
+- Construire une API REST en PHP sans framework
+- Gérer l'état de l'application entre plusieurs formulaires Windows Forms
+- Appliquer le patron MVC dans un contexte desktop
+- Coordonner deux projets interdépendants sur des dépôts séparés
+
+## Compétences couvertes (B1/B2)
+
+- **B1.1** Gérer le patrimoine informatique
+- **B1.4** Travailler en mode projet
+- **B1.5** Mettre à disposition des utilisateurs un service informatique
+- **B1.6** Organiser son développement professionnel
+- **B2.1** Concevoir et développer une solution applicative
+- **B2.3** Gérer les données
+
+> Cet atelier m'a appris à raisonner en termes d'architecture distribuée — séparer la couche données (API) de la couche présentation (client desktop).`,
+    },
+    stack: ["C#", "Windows Forms", "PHP", "MySQL"],
+    image: mediatek,
+    github: "https://github.com/mkarl-13/mediatekdocuments",
+    live: "",
+    showGithub: true,
+    showLive: false,
+    links: [
+      {
+        label: { en: "Project report (PDF)", fr: "Compte rendu (PDF)" },
+        url: "",
+      },
+      {
+        label: { en: "Official context (PDF)", fr: "Contexte officiel (PDF)" },
+        url: mediatekDocumentsContextePdf,
+      },
+      {
+        label: {
+          en: "Development contract (PDF)",
+          fr: "Contrat de développement (PDF)",
+        },
+        url: "",
+      },
+      {
+        label: { en: "Specifications", fr: "Cahier des charges" },
+        url: "",
+      },
+      {
+        label: {
+          en: "Missions document (PDF)",
+          fr: "Document des missions (PDF)",
+        },
+        url: "",
+      },
+      {
+        label: { en: "Acceptance report", fr: "PV de recette" },
+        url: "",
+      },
+      {
+        label: { en: "GitHub – Windows client", fr: "GitHub – Client Windows" },
+        url: "https://github.com/mkarl-13/mediatekdocuments",
+      },
+      {
+        label: { en: "GitHub – REST API", fr: "GitHub – API REST" },
+        url: "https://github.com/mkarl-13/rest_mediatekdocuments",
+      },
+      {
+        label: { en: "Technical documentation", fr: "Documentation technique" },
+        url: "",
+      },
+    ],
+  },
   {
     slug: "mesvoyages",
     title: {
@@ -86,7 +401,7 @@ Le projet a été déployé sur un hébergement mutualisé.
 
 > Ce projet m'a donné une base solide en développement back-end et m'a permis de comprendre le cycle de vie complet d'une application web.`,
     },
-    stack: ["Symfony", "JavaScript"],
+    stack: ["Symfony", "MySQL"],
     image: voyages,
     github: "https://github.com/mkarl-13/mesvoyages",
     live: "http://mesvoyages.sc1mika2559.universe.wf/",
@@ -254,7 +569,7 @@ La structure du projet est découpée en :
     },
     stack: ["React", "TypeScript"],
     image: portfolio,
-    github: "https://github.com/karlmitschi/e-commerce",
+    github: "", // À compléter
     live: "https://karl-mitschi.fr",
     showGithub: true,
     showLive: true,

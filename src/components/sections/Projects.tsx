@@ -27,7 +27,7 @@ export function Projects() {
         </FadeIn>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch">
-          {projects.map((project, i) => (
+          {projects.slice(0, 3).map((project, i) => (
             <FadeIn key={project.slug} delay={i * 80} className="h-full">
               <Card className="h-full flex flex-col overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 p-0">
                 {/* Image */}

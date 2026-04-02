@@ -1,6 +1,16 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-svgr/client" />
 
+declare module "*.pdf" {
+  const src: string;
+  export default src;
+}
+
+declare module "*.docx" {
+  const src: string;
+  export default src;
+}
+
 declare module "*.svg?react" {
   import type { FunctionComponent, SVGProps } from "react";
   const ReactComponent: FunctionComponent<SVGProps<SVGSVGElement>>;
